@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>کاتالوگ محصولات نبات</title>
+    
+    <!-- لود نسخه فشرده و سبک Tailwind بدون پردازش جاوااسکریپت سنگین در کلاینت -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    
+    <!-- لود فونت استاندارد وزیر متن -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f5f5f4;
+            /* جلوگیری از رفرش ناخواسته صفحه در اندروید هنگام کشیدن انگشت به پایین روی لایت‌باکس */
+            overscroll-behavior-y: contain; 
+        }
+        /* نسبت ابعاد ۳:۴ دقیق تصاویر */
+        .img-container {
+            position: relative;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            border-radius: 16px;
+            background-color: #f5f5f4;
+        }
+        /* استایل ذره‌بین زوم مخصوص دسکتاپ */
+        .zoom-lens {
+            position: absolute;
+            border: 3px solid #d97706; /* amber-600 */
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            background-repeat: no-repeat;
+            display: none;
+            pointer-events: none;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        /* ذره بین را فقط در دستگاه‌های دارای موس فعال کن */
+        @media (hover: hover) {
+            .img-container:hover {
+                cursor: crosshair;
+            }
+        }
+        /* غیرفعال کردن ذره‌بین در موبایل و بهینه‌سازی دکمه لمسی */
+        @media (max-width: 768px) {
+            .zoom-lens {
+                display: none !important;
+            }
+            .img-container {
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col justify-between">
+
+    <!-- هدر جدید: فوق‌العاده باریک، شیک و بدون چسبندگی (با اسکرول از صفحه خارج می‌شود) -->
+    <header class="py-4 text-center bg-white border-b border-gray-100 shadow-sm">
+        <h1 class="text-lg font-extrabold text-gray-900">کاتالوگ محصولات </h1>
+        <p class="text-gray-500 text-[11px] mt-0.5"></p>
+    </header>
+
+    <!-- بخش اصلی محصولات -->
+    <main class="max-w-5xl mx-auto px-4 py-6 flex-grow w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+            
+            <!-- محصول اول: نبات ممتاز با پوشال زعفران -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex flex-col justify-between">
+                <div>
+                    <div class="img-container" 
+                         onmousemove="moveLens(event, 'img1', 'lens1')" 
+                         onmouseenter="showLens('lens1')" 
+                         onmouseleave="hideLens('lens1')"
+                         onclick="openLightbox('img1')">
+                        
+                        <img id="img1" src="/1.jpeg" alt="نبات ممتاز با پوشال زعفران" class="w-full h-full object-cover" decoding="async">
+                        <div id="lens1" class="zoom-lens"></div>
+                        
+                        <!-- دکمه راهنما در دسکتاپ و کلیک در موبایل -->
+                        <div class="absolute bottom-3 right-3 bg-black bg-opacity-60 text-white text-[10px] px-3 py-1 rounded-full pointer-events-none backdrop-filter backdrop-blur-sm">
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <span class="text-amber-800 text-[11px] font-bold bg-amber-50 px-2.5 py-0.5 rounded">درجه یک</span>
+                        <h2 class="text-lg font-bold text-gray-900 mt-2">نبات ممتاز با پوشال زعفران</h2>
+                        <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                            تهیه شده از مرغوب‌ترین شکر و پوشال زعفران.
+                         طعم شیرین سنتی همراه با عطر بی‌نظیر زعفران.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between">
+                    <span class="text-gray-500 text-xs">کد محصول: N-101</span>
+                    <a href="tel:09120000000" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all duration-200">
+                        سفارش تلفنی
+                    </a>
+                </div>
+            </div>
+
+            <!-- محصول دوم: نبات زرد نقلی -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex flex-col justify-between">
+                <div>
+                    <div class="img-container" 
+                         onmousemove="moveLens(event, 'img2', 'lens2')" 
+                         onmouseenter="showLens('lens2')" 
+                         onmouseleave="hideLens('lens2')"
+                         onclick="openLightbox('img2')">
+                        
+                        <img id="img2" src="/2.jpeg" alt="نبات زرد نقلی" class="w-full h-full object-cover" decoding="async">
+                        <div id="lens2" class="zoom-lens"></div>
+                        
+                        <div class="absolute bottom-3 right-3 bg-black bg-opacity-60 text-white text-[10px] px-3 py-1 rounded-full pointer-events-none backdrop-filter backdrop-blur-sm">
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <span class="text-amber-800 text-[11px] font-bold bg-amber-50 px-2.5 py-0.5 rounded">سنتی و اصیل</span>
+                        <h2 class="text-xl font-bold text-gray-900 mt-2">نبات زرد نقلی</h2>
+                        <p class="text-gray-600 text-xs mt-2 leading-relaxed">
+                            نبات زرد نقلی با تکیه بر روش‌های فرآوری استاندارد و کاملاً بهداشتی با کریستال‌های شفاف و خوش‌رنگ.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between">
+                    <span class="text-gray-500 text-xs">کد محصول: N-102</span>
+                    <a href="tel:09120000000" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all duration-200">
+                        سفارش تلفنی
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- لایت باکس ارائه محصول مجهز به زوم موبایلی پیشرفته (Pinch-to-zoom & Pan) -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden items-center justify-center p-0" onclick="closeLightbox()">
+        <!-- دکمه خروج بزرگ و لمسی بهینه شده برای انگشت شست -->
+        <button class="absolute top-4 right-4 text-white hover:text-amber-500 z-50 bg-black bg-opacity-50 p-2.5 rounded-full" onclick="closeLightbox()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <!-- کانتینر تصویر لایت باکس جهت مهار زوم لمسی -->
+        <div class="w-full h-full flex items-center justify-center overflow-hidden" onclick="event.stopPropagation()">
+            <img id="lightbox-img" class="max-w-full max-h-full object-contain select-none transition-transform duration-200 ease-out" style="touch-action: none;" src="" alt="ارائه بزرگنمایی محصول">
+        </div>
+    </div>
+
+    <!-- فوتر -->
+    <footer class="bg-gray-900 text-gray-400 py-4 text-center text-[11px] border-t border-gray-800">
+        <p>© ۱۴۰۵ کلیه حقوق برای کاتالوگ محصولات محفوظ است.</p>
+    </footer>
+
+    <!-- کدهای بهینه‌سازی شده زوم ذره‌بینی (دسکتاپ) و تاچ گسچر زوم پیشرفته (موبایل) -->
+    <script>
+        // عملکرد زوم دسکتاپ (ذره‌بین)
+        function showLens(lensId) {
+            if (window.matchMedia("(hover: hover)").matches) {
+                document.getElementById(lensId).style.display = "block";
+            }
+        }
+
+        function hideLens(lensId) {
+            document.getElementById(lensId).style.display = "none";
+        }
+
+        function moveLens(e, imgId, lensId) {
+            if (!window.matchMedia("(hover: hover)").matches) return;
+            
+            const img = document.getElementById(imgId);
+            const lens = document.getElementById(lensId);
+            const rect = img.getBoundingClientRect();
+            
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+            
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+            if (y < 0) y = 0;
+            if (y > rect.height) y = rect.height;
+            
+            lens.style.left = (x - lens.offsetWidth / 2) + "px";
+            lens.style.top = (y - lens.offsetHeight / 2) + "px";
+            
+            const zoomLevel = 2.2;
+            lens.style.backgroundImage = `url('${img.src}')`;
+            lens.style.backgroundSize = (rect.width * zoomLevel) + "px " + (rect.height * zoomLevel) + "px";
+            
+            const bgX = (x * zoomLevel) - (lens.offsetWidth / 2);
+            const bgY = (y * zoomLevel) - (lens.offsetHeight / 2);
+            lens.style.backgroundPosition = `-${bgX}px -${bgY}px`;
+        }
+
+        // --- عملکرد سیستم زوم موبایلی پیشرفته (Pinch to Zoom & Double Tap) ---
+        let zoomScale = 1;
+        let startX = 0, startY = 0;
+        let posX = 0, posY = 0;
+        let initialDistance = 0;
+        let isPanning = false;
+        let lastTap = 0;
+
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        lightboxImg.addEventListener('touchstart', (e) => {
+            // حذف افکت ترنزیشن در طول جابجایی انگشت برای رندر فوق‌العاده روان (۶۰ فریم)
+            lightboxImg.style.transition = 'none';
+
+            if (e.touches.length === 2) {
+                initialDistance = getDistance(e.touches[0], e.touches[1]);
+            } else if (e.touches.length === 1) {
+                isPanning = zoomScale > 1;
+                startX = e.touches[0].clientX - posX;
+                startY = e.touches[0].clientY - posY;
+            }
+        });
+
+        lightboxImg.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2 && initialDistance > 0) {
+                e.preventDefault(); // ممانعت از اسکرول مرورگر در زمان زوم دو انگشتی
+                const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                const scaleChange = currentDistance / initialDistance;
+                
+                // محدوده زوم مجاز بین ۱ تا ۴ برابر
+                zoomScale = Math.min(Math.max(1, zoomScale * scaleChange), 4);
+                initialDistance = currentDistance;
+                applyTransform();
+            } else if (e.touches.length === 1 && isPanning) {
+                e.preventDefault(); // ممانعت از جابجایی صفحه در زمان حرکت تصویر زوم شده
+                posX = e.touches[0].clientX - startX;
+                posY = e.touches[0].clientY - startY;
+                
+                // فرمول محدودسازی حرکت جهت جلوگیری از بیرون زدن کامل عکس از صفحه
+                const maxPanX = (zoomScale - 1) * (lightboxImg.clientWidth / 2);
+                const maxPanY = (zoomScale - 1) * (lightboxImg.clientHeight / 2);
+                posX = Math.min(Math.max(-maxPanX, posX), maxPanX);
+                posY = Math.min(Math.max(-maxPanY, posY), maxPanY);
+                
+                applyTransform();
+            }
+        }, { passive: false });
+
+        lightboxImg.addEventListener('touchend', (e) => {
+            if (e.touches.length < 2) {
+                initialDistance = 0;
+            }
+            if (e.touches.length === 0) {
+                isPanning = false;
+                // اگر زوم ناچیز بود، به حالت اولیه بازگردانده شود
+                if (zoomScale <= 1.1) {
+                    lightboxImg.style.transition = 'transform 0.2s ease-out';
+                    resetZoom();
+                }
+            }
+
+            // تشخیص دابل تپ (ضربه دوگانه سریع) جهت زوم آنی و آسان
+            const now = new Date().getTime();
+            const timesince = now - lastTap;
+            if (timesince < 300 && timesince > 0) {
+                e.preventDefault();
+                lightboxImg.style.transition = 'transform 0.2s ease-out';
+                if (zoomScale > 1.1) {
+                    resetZoom();
+                } else {
+                    zoomScale = 2.5;
+                    posX = 0;
+                    posY = 0;
+                    applyTransform();
+                }
+            }
+            lastTap = now;
+        });
+
+        function getDistance(t1, t2) {
+            return Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+        }
+
+        function applyTransform() {
+            lightboxImg.style.transform = `translate(${posX}px, ${posY}px) scale(${zoomScale})`;
+        }
+
+        function resetZoom() {
+            zoomScale = 1;
+            posX = 0;
+            posY = 0;
+            lightboxImg.style.transform = `translate(0px, 0px) scale(1)`;
+        }
+
+        // مدیریت باز و بسته شدن لایت‌باکس ارائه محصول
+        function openLightbox(imgId) {
+            const imgElement = document.getElementById(imgId);
+            const lightbox = document.getElementById('lightbox');
+            
+            resetZoom();
+            lightboxImg.src = imgElement.src;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            
+            // قفل کردن اسکرول پس‌زمینه کاتالوگ
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            
+            // آزادسازی مجدد اسکرول صفحه کاتالوگ
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
