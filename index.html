@@ -26,28 +26,28 @@
             aspect-ratio: 3 / 4;
             overflow: hidden;
             border-radius: 16px;
-            background-color: #f5f5f4;
+            background-color: #e7e5e4;
         }
         /* استایل ذره‌بین زوم مخصوص دسکتاپ */
         .zoom-lens {
             position: absolute;
-            border: 3px solid #d97706; /* amber-600 */
+            border: 2px solid #d97706; /* amber-600 */
             border-radius: 50%;
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             background-repeat: no-repeat;
             display: none;
             pointer-events: none;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
             z-index: 10;
         }
-        /* ذره بین را فقط در دستگاه‌های دارای موس فعال کن */
+        /* فعال‌سازی نشانگر زوم در دسکتاپ */
         @media (hover: hover) {
             .img-container:hover {
                 cursor: crosshair;
             }
         }
-        /* غیرفعال کردن ذره‌بین در موبایل و بهینه‌سازی دکمه لمسی */
+        /* غیرفعال کردن ذره‌بین در دستگاه‌های لمسی */
         @media (max-width: 768px) {
             .zoom-lens {
                 display: none !important;
@@ -60,18 +60,30 @@
 </head>
 <body class="text-gray-800 min-h-screen flex flex-col justify-between">
 
-    <!-- هدر جدید: فوق‌العاده باریک، شیک و بدون چسبندگی (با اسکرول از صفحه خارج می‌شود) -->
-    <header class="py-4 text-center bg-white border-b border-gray-100 shadow-sm">
-        <h1 class="text-lg font-extrabold text-gray-900">کاتالوگ محصولات </h1>
-        <p class="text-gray-500 text-[11px] mt-0.5"></p>
+    <!-- هدر فوق‌العاده باریک و شیک همراه با فیلتر جستجوی زنده (غیر چسبنده جهت عدم مزاحمت در پرزنت) -->
+    <header class="py-2.5 bg-white border-b border-gray-150 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2.5">
+            <div class="text-right">
+                <h1 class="text-base font-extrabold text-gray-900">کاتالوگ محصولات نبات</h1>
+            </div>
+            <!-- ابزار جستجوی سریع برای راحتی بیشتر در زمان ارائه محصولات -->
+            <div class="relative w-full sm:w-60">
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="جستجوی سریع محصول..." class="w-full text-xs pr-8 pl-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 transition-all">
+                <span class="absolute right-2.5 top-2 text-gray-400">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </span>
+            </div>
+        </div>
     </header>
 
     <!-- بخش اصلی محصولات -->
     <main class="max-w-5xl mx-auto px-4 py-6 flex-grow w-full">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             
             <!-- محصول اول: نبات ممتاز با پوشال زعفران -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex flex-col justify-between">
+            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 p-4 flex flex-col justify-between transition-all duration-300">
                 <div>
                     <div class="img-container" 
                          onmousemove="moveLens(event, 'img1', 'lens1')" 
@@ -79,35 +91,30 @@
                          onmouseleave="hideLens('lens1')"
                          onclick="openLightbox('img1')">
                         
-                        <img id="img1" src="https://raw.githubusercontent.com/planettechno0/nabat/refs/heads/main/1.jpeg" alt="نبات ممتاز با پوشال زعفران" class="w-full h-full object-cover" decoding="async">
+                        <img id="img1" src="/1.jpeg" alt="نبات ممتاز با پوشال زعفران" class="w-full h-full object-cover" decoding="async">
                         <div id="lens1" class="zoom-lens"></div>
-                        
-                        <!-- دکمه راهنما در دسکتاپ و کلیک در موبایل -->
-                        <div class="absolute bottom-3 right-3 bg-black bg-opacity-60 text-white text-[10px] px-3 py-1 rounded-full pointer-events-none backdrop-filter backdrop-blur-sm">
-                            
-                        </div>
                     </div>
                     
                     <div class="pt-4">
-                        <span class="text-amber-800 text-[11px] font-bold bg-amber-50 px-2.5 py-0.5 rounded">درجه یک</span>
-                        <h2 class="text-lg font-bold text-gray-900 mt-2">نبات ممتاز با پوشال زعفران</h2>
-                        <p class="text-gray-600 text-xs mt-2 leading-relaxed">
-                            تهیه شده از مرغوب‌ترین شکر و پوشال زعفران.
-                         طعم شیرین سنتی همراه با عطر بی‌نظیر زعفران.
+                        <span class="text-amber-800 text-[10px] font-bold bg-amber-50 px-2.5 py-0.5 rounded">درجه یک</span>
+                        <h2 class="product-title text-base font-bold text-gray-900 mt-1.5">نبات ممتاز با پوشال زعفران</h2>
+                        <p class="product-desc text-gray-500 text-xs mt-1.5 leading-relaxed">
+                            تهیه شده از مرغوب‌ترین شکر و پوشال زعفران درجه یک. ترکیب طعم شیرین سنتی همراه با عطر و طعم ماندگار زعفران اصیل.
                         </p>
                     </div>
                 </div>
                 
                 <div class="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between">
-                    <span class="text-gray-500 text-xs">کد محصول: N-101</span>
-                    <a href="tel:09120000000" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all duration-200">
-                        سفارش تلفنی
+                    <span class="text-gray-400 text-[10px] bg-gray-50 px-2 py-0.5 rounded">کد: N-101</span>
+                    <a href="tel:09120000000" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-1.5 shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <span>تماس و سفارش</span>
                     </a>
                 </div>
             </div>
 
             <!-- محصول دوم: نبات زرد نقلی -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex flex-col justify-between">
+            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 p-4 flex flex-col justify-between transition-all duration-300">
                 <div>
                     <div class="img-container" 
                          onmousemove="moveLens(event, 'img2', 'lens2')" 
@@ -115,27 +122,86 @@
                          onmouseleave="hideLens('lens2')"
                          onclick="openLightbox('img2')">
                         
-                        <img id="img2" src="https://raw.githubusercontent.com/planettechno0/nabat/refs/heads/main/2.jpeg" alt="نبات زرد نقلی" class="w-full h-full object-cover" decoding="async">
+                        <img id="img2" src="/2.jpeg" alt="نبات زرد نقلی" class="w-full h-full object-cover" decoding="async">
                         <div id="lens2" class="zoom-lens"></div>
-                        
-                        <div class="absolute bottom-3 right-3 bg-black bg-opacity-60 text-white text-[10px] px-3 py-1 rounded-full pointer-events-none backdrop-filter backdrop-blur-sm">
-                            
-                        </div>
                     </div>
                     
                     <div class="pt-4">
-                        <span class="text-amber-800 text-[11px] font-bold bg-amber-50 px-2.5 py-0.5 rounded">سنتی و اصیل</span>
-                        <h2 class="text-xl font-bold text-gray-900 mt-2">نبات زرد نقلی</h2>
-                        <p class="text-gray-600 text-xs mt-2 leading-relaxed">
-                            نبات زرد نقلی با تکیه بر روش‌های فرآوری استاندارد و کاملاً بهداشتی با کریستال‌های شفاف و خوش‌رنگ.
+                        <span class="text-amber-800 text-[10px] font-bold bg-amber-50 px-2.5 py-0.5 rounded">سنتی و اصیل</span>
+                        <h2 class="product-title text-base font-bold text-gray-900 mt-1.5">نبات زرد نقلی</h2>
+                        <p class="product-desc text-gray-500 text-xs mt-1.5 leading-relaxed">
+                            نبات زرد نقلی با تکیه بر روش‌های فرآوری استاندارد و کاملاً بهداشتی با کریستال‌های شفاف، خوش‌رنگ و باکیفیت بالا.
                         </p>
                     </div>
                 </div>
                 
                 <div class="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between">
-                    <span class="text-gray-500 text-xs">کد محصول: N-102</span>
-                    <a href="tel:09120000000" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all duration-200">
-                        سفارش تلفنی
+                    <span class="text-gray-400 text-[10px] bg-gray-50 px-2 py-0.5 rounded">کد: N-102</span>
+                    <a href="tel:09120000000" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-1.5 shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <span>تماس و سفارش</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- محصول سوم: نبات تک نفره -->
+            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 p-4 flex flex-col justify-between transition-all duration-300">
+                <div>
+                    <div class="img-container" 
+                         onmousemove="moveLens(event, 'img3', 'lens3')" 
+                         onmouseenter="showLens('lens3')" 
+                         onmouseleave="hideLens('lens3')"
+                         onclick="openLightbox('img3')">
+                        
+                        <img id="img3" src="/3.jpeg" alt="نبات تک نفره" class="w-full h-full object-cover" decoding="async">
+                        <div id="lens3" class="zoom-lens"></div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <span class="text-amber-800 text-[10px] font-bold bg-amber-50 px-2.5 py-0.5 rounded">بسته‌بندی تک عددی</span>
+                        <h2 class="product-title text-base font-bold text-gray-900 mt-1.5">نبات تک نفره</h2>
+                        <p class="product-desc text-gray-500 text-xs mt-1.5 leading-relaxed">
+                            مناسب برای پذیرایی مجلسی، کافه‌ها، رستوران‌ها و هتل‌ها. تولید شده در بسته‌بندی کاملاً تک‌نفره، بهداشتی و شکیل.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between">
+                    <span class="text-gray-400 text-[10px] bg-gray-50 px-2 py-0.5 rounded">کد: N-103</span>
+                    <a href="tel:09120000000" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-1.5 shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <span>تماس و سفارش</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- محصول چهارم: نبات نقلی سفید نقلی -->
+            <div class="product-card bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 p-4 flex flex-col justify-between transition-all duration-300">
+                <div>
+                    <div class="img-container" 
+                         onmousemove="moveLens(event, 'img4', 'lens4')" 
+                         onmouseenter="showLens('lens4')" 
+                         onmouseleave="hideLens('lens4')"
+                         onclick="openLightbox('img4')">
+                        
+                        <img id="img4" src="/4.jpeg" alt="نبات نقلی سفید نقلی" class="w-full h-full object-cover" decoding="async">
+                        <div id="lens4" class="zoom-lens"></div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <span class="text-amber-800 text-[10px] font-bold bg-amber-50 px-2.5 py-0.5 rounded">شفاف</span>
+                        <h2 class="product-title text-base font-bold text-gray-900 mt-1.5">نبات چوبی سفید نقلی</h2>
+                        <p class="product-desc text-gray-500 text-xs mt-1.5 leading-relaxed">
+                            نبات چوبی سفید  نقلی بدون رنگ افزودنی، با تصفیه عالی و طعمی ملایم. مناسب برای شیرین کردن انواع دمنوش و مصرف روزانه خانواده.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="pt-4 mt-4 border-t border-gray-100 flex items-center justify-between">
+                    <span class="text-gray-400 text-[10px] bg-gray-50 px-2 py-0.5 rounded">کد: N-104</span>
+                    <a href="tel:09120000000" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-1.5 shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <span>تماس و سفارش</span>
                     </a>
                 </div>
             </div>
@@ -213,7 +279,6 @@
         const lightboxImg = document.getElementById('lightbox-img');
 
         lightboxImg.addEventListener('touchstart', (e) => {
-            // حذف افکت ترنزیشن در طول جابجایی انگشت برای رندر فوق‌العاده روان (۶۰ فریم)
             lightboxImg.style.transition = 'none';
 
             if (e.touches.length === 2) {
@@ -227,20 +292,18 @@
 
         lightboxImg.addEventListener('touchmove', (e) => {
             if (e.touches.length === 2 && initialDistance > 0) {
-                e.preventDefault(); // ممانعت از اسکرول مرورگر در زمان زوم دو انگشتی
+                e.preventDefault(); 
                 const currentDistance = getDistance(e.touches[0], e.touches[1]);
                 const scaleChange = currentDistance / initialDistance;
                 
-                // محدوده زوم مجاز بین ۱ تا ۴ برابر
                 zoomScale = Math.min(Math.max(1, zoomScale * scaleChange), 4);
                 initialDistance = currentDistance;
                 applyTransform();
             } else if (e.touches.length === 1 && isPanning) {
-                e.preventDefault(); // ممانعت از جابجایی صفحه در زمان حرکت تصویر زوم شده
+                e.preventDefault(); 
                 posX = e.touches[0].clientX - startX;
                 posY = e.touches[0].clientY - startY;
                 
-                // فرمول محدودسازی حرکت جهت جلوگیری از بیرون زدن کامل عکس از صفحه
                 const maxPanX = (zoomScale - 1) * (lightboxImg.clientWidth / 2);
                 const maxPanY = (zoomScale - 1) * (lightboxImg.clientHeight / 2);
                 posX = Math.min(Math.max(-maxPanX, posX), maxPanX);
@@ -256,14 +319,12 @@
             }
             if (e.touches.length === 0) {
                 isPanning = false;
-                // اگر زوم ناچیز بود، به حالت اولیه بازگردانده شود
                 if (zoomScale <= 1.1) {
                     lightboxImg.style.transition = 'transform 0.2s ease-out';
                     resetZoom();
                 }
             }
 
-            // تشخیص دابل تپ (ضربه دوگانه سریع) جهت زوم آنی و آسان
             const now = new Date().getTime();
             const timesince = now - lastTap;
             if (timesince < 300 && timesince > 0) {
@@ -296,7 +357,6 @@
             lightboxImg.style.transform = `translate(0px, 0px) scale(1)`;
         }
 
-        // مدیریت باز و بسته شدن لایت‌باکس ارائه محصول
         function openLightbox(imgId) {
             const imgElement = document.getElementById(imgId);
             const lightbox = document.getElementById('lightbox');
@@ -306,7 +366,6 @@
             lightbox.classList.remove('hidden');
             lightbox.classList.add('flex');
             
-            // قفل کردن اسکرول پس‌زمینه کاتالوگ
             document.body.style.overflow = 'hidden';
         }
 
@@ -314,9 +373,24 @@
             const lightbox = document.getElementById('lightbox');
             lightbox.classList.add('hidden');
             lightbox.classList.remove('flex');
-            
-            // آزادسازی مجدد اسکرول صفحه کاتالوگ
             document.body.style.overflow = '';
+        }
+
+        // عملکرد فیلتر سریع محصولات
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.product-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.product-title').textContent.toLowerCase();
+                const desc = card.querySelector('.product-desc').textContent.toLowerCase();
+                
+                if (title.includes(query) || desc.includes(query)) {
+                    card.style.display = 'flex'; // حفظ نمایش به صورت Flexbox
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
